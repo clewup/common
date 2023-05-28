@@ -1,6 +1,6 @@
 'use client'
 
-import { LockrContext } from '@/lib/common/contexts/LockrContext'
+import { LockrContext } from '@/lib/common/contexts/LockrContext/LockrContext'
 import { UserType } from '@/lib/common/types/userTypes'
 import jwt from 'jsonwebtoken'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
