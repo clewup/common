@@ -10,7 +10,12 @@ interface LockrContextValues {
   setAdmin: Dispatch<SetStateAction<boolean>>
 }
 
-const LockrContext = createContext<LockrContextValues>({} as LockrContextValues)
+const LockrContext = createContext<LockrContextValues>({
+  user: null,
+  setUser: () => null,
+  isAdmin: false,
+  setAdmin: () => null
+})
 
 interface LockrProviderProps {
   children: ReactNode

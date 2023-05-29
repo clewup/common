@@ -26,15 +26,15 @@ const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
 
   const router = useRouter()
 
-  const LOCKR_BASE_URL = process.env.LOCKR_BASE_URL || 'https://lockr.clewup.co.uk'
+  const LOCKR_BASE_URL = process.env.LOCKR_BASE_URL ?? 'https://lockr.clewup.co.uk'
   const REDIRECT_URI =
-        redirectUri ||
-        process.env.NEXT_PUBLIC_LOCKR_APP_URL ||
-        process.env.LOCKR_APP_URL ||
-        process.env.NEXT_PUBLIC_APP_URL ||
-        process.env.APP_URL
+        redirectUri ??
+        process.env.NEXT_PUBLIC_LOCKR_APP_URL ??
+        process.env.LOCKR_APP_URL ??
+        process.env.NEXT_PUBLIC_APP_URL ??
+        process.env.APP_URL as string
   const APPLICATION_ID =
-        applicationId || process.env.NEXT_PUBLIC_LOCKR_APPLICATION_ID || process.env.LOCKR_APPLICATION_ID
+        applicationId ?? process.env.NEXT_PUBLIC_LOCKR_APPLICATION_ID ?? process.env.LOCKR_APPLICATION_ID as string
 
   function signIn () {
     router.push(`${LOCKR_BASE_URL}?redirect_uri=${REDIRECT_URI}&application_id=${APPLICATION_ID}`)
