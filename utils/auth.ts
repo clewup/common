@@ -8,11 +8,3 @@ export function decodeAccessToken () {
 
   return jwt.decode(accessToken) as UserType
 }
-
-export function withAuthHeaders (headers?: Record<string, string>) {
-  const user = decodeAccessToken()
-  const authedHeaders: HeadersInit & { 'x-user'?: string } = { ...headers }
-  if (user?.email) authedHeaders['x-user'] = user.email
-
-  return authedHeaders
-}
