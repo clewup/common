@@ -26,7 +26,9 @@ export default function useApi () {
       headers
     })
 
-    return (await response.json()) as T
+    if (!response.ok) throw new Error(response.statusText)
+
+    return await response.json() as T
   }
 
   async function get<T> (url: string, options?: RequestInit) {
