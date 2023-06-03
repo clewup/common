@@ -26,7 +26,7 @@ export default function useApi () {
       headers
     })
 
-    if (!response.ok) throw new Error(response.statusText)
+    if (response.status === 400 || response.status === 500) throw new Error(response.statusText)
 
     return await response.json() as T
   }
