@@ -43,6 +43,7 @@ const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
   function signOut () {
     localStorage.removeItem('lockr.at')
     setUser(null)
+    router.push('/')
   }
 
   async function fetchAccessToken (code: string): Promise<string> {
