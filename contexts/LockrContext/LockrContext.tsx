@@ -11,10 +11,10 @@ interface LockrContextValues {
 }
 
 const LockrContext = createContext<LockrContextValues>({
-  user: null,
-  setUser: () => null,
   isAdmin: false,
-  setAdmin: () => null
+  setAdmin: () => null,
+  setUser: () => null,
+  user: null
 })
 
 interface LockrProviderProps {
@@ -25,7 +25,7 @@ const LockrProvider: FC<LockrProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserType | null>(null)
   const [isAdmin, setAdmin] = useState(false)
 
-  return <LockrContext.Provider value={{ user, setUser, isAdmin, setAdmin }}>{children}</LockrContext.Provider>
+  return <LockrContext.Provider value={{ isAdmin, setAdmin, setUser, user }}>{children}</LockrContext.Provider>
 }
 
 const useLockr = () => {

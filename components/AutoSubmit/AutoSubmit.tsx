@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 
 // should only be used in forms where text inputs are not being used
 const AutoSubmit = () => {
-  const { values, submitForm } = useFormikContext()
+  const { submitForm, values } = useFormikContext()
 
   useEffect(() => {
     submitForm()

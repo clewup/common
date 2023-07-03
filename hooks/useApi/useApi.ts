@@ -21,9 +21,9 @@ export default function useApi () {
 
     const response = await fetch(url, {
       ...options,
-      method,
       body: body ? JSON.stringify(body) : undefined,
-      headers
+      headers,
+      method
     })
 
     if (response.status === 400 || response.status === 500) throw new Error(response.statusText)
@@ -52,10 +52,10 @@ export default function useApi () {
   }
 
   return {
+    del,
     get,
-    post,
     patch,
-    put,
-    del
+    post,
+    put
   }
 }

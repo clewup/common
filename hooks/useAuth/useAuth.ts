@@ -11,7 +11,7 @@ interface UseAuthProps {
   applicationId?: number
 }
 
-const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
+const useAuth = ({ applicationId, redirectUri }: UseAuthProps) => {
   const context = useContext(LockrContext)
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -22,7 +22,7 @@ const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
   if (!context) {
     throw new Error('useAuth may only be used within the LockrContext')
   }
-  const { user, setUser, setAdmin } = context
+  const { setAdmin, setUser, user } = context
 
   const router = useRouter()
 
@@ -48,8 +48,8 @@ const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
 
   async function fetchAccessToken (code: string): Promise<string> {
     const accessTokenResponse = await fetch(`${LOCKR_BASE_URL}/api/auth/token`, {
-      method: 'POST',
-      body: JSON.stringify({ authorization_code: code })
+      body: JSON.stringify({ authorization_code: code }),
+      method: 'POST'
     })
 
     if (!accessTokenResponse.ok) throw new Error('An error occurred fetching the access token')
@@ -85,9 +85,9 @@ const useAuth = ({ redirectUri, applicationId }: UseAuthProps) => {
   }, [code])
 
   return {
+    isAuthing,
     signIn,
-    signOut,
-    isAuthing
+    signOut
   }
 }
 
