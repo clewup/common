@@ -52,7 +52,7 @@ const useAuth = ({ applicationId, redirectUri }: UseAuthProps) => {
 
     async function fetchAccessToken(code: string): Promise<string> {
         const accessTokenResponse = await fetch(`${LOCKR_BASE_URL}/api/auth/token`, {
-            body: JSON.stringify({ grant_type: GrantTypes.AuthorizationCode, authorization_code: code }),
+            body: JSON.stringify({ authorization_code: code, grant_type: GrantTypes.AuthorizationCode }),
             method: 'POST',
         });
 
@@ -65,9 +65,9 @@ const useAuth = ({ applicationId, redirectUri }: UseAuthProps) => {
     async function fetchClientAccessToken() {
         const accessTokenResponse = await fetch(`${LOCKR_BASE_URL}/api/auth/token`, {
             body: JSON.stringify({
-                grant_type: GrantTypes.ClientCredentials,
                 client_id: APPLICATION_ID,
                 client_secret: APPLCIATION_SECRET,
+                grant_type: GrantTypes.ClientCredentials,
             }),
             method: 'POST',
         });
