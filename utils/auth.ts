@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 export function decodeAccessToken () {
   const accessToken = localStorage.getItem('lockr.at')
 
-  if (!accessToken) return null
+  if (accessToken === null) return null
 
   return jwt.decode(accessToken) as UserType
 }

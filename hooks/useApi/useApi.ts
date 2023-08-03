@@ -17,11 +17,11 @@ export default function useApi () {
     const headers: HeadersInit & { 'x-user'?: string } = {
       ...options?.headers
     }
-    if (user?.email) headers['x-user'] = user.email
+    if ((user?.email) != null) headers['x-user'] = user.email
 
     const response = await fetch(url, {
       ...options,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body !== undefined && body !== null ? JSON.stringify(body) : undefined,
       headers,
       method
     })

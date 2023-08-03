@@ -31,7 +31,7 @@ const LockrProvider: FC<LockrProviderProps> = ({ children }) => {
 const useLockr = () => {
   const context = useContext(LockrContext)
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useLockr may only be used within the LockrContext')
   }
 

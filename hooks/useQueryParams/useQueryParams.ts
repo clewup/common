@@ -11,7 +11,7 @@ export default function useQueryParams<T = unknown> () {
 
   function setQueryParams (params: Partial<T>, targetRoute?: string) {
     Object.entries(params).forEach(([key, value]) => {
-      if (value) {
+      if (value !== null && value !== undefined) {
         urlSearchParams.set(key, String(value))
       } else {
         urlSearchParams.delete(key)
@@ -19,9 +19,9 @@ export default function useQueryParams<T = unknown> () {
     })
 
     const search = urlSearchParams.toString()
-    const query = search ? `?${search}` : ''
+    const query = search !== null && search !== '' ? `?${search}` : ''
 
-    targetRoute ? router.push(`${targetRoute}${query}`) : router.push(`${pathname}${query}`)
+    targetRoute !== undefined ? router.push(`${targetRoute}${query}`) : router.push(`${pathname}${query}`)
   }
 
   return { queryParams, setQueryParams }

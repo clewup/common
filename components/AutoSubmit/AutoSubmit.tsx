@@ -8,7 +8,7 @@ const AutoSubmit = () => {
   const { submitForm, values } = useFormikContext()
 
   useEffect(() => {
-    submitForm()
+    void submitForm()
   }, [values])
 
   return <></>

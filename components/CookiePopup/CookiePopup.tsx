@@ -4,28 +4,28 @@ import { db, DexieTables } from '@/lib/dexie/db'
 import React, { type FC, useEffect, useState } from 'react'
 
 interface CookiePopupProps {
-    customMessage?: string
+  customMessage?: string
 }
 
 const CookiePopup: FC<CookiePopupProps> = ({ customMessage }) => {
-    const [isRendered, setRendered] = useState(false)
+  const [isRendered, setRendered] = useState(false)
 
-    async function checkCookieConsent() {
-        const isExisting = await db.services.check(DexieTables.COOKIE_CONSENT)
-        setRendered(!isExisting)
-    }
-    useEffect(() => {
-        checkCookieConsent()
-    }, [])
+  async function checkCookieConsent () {
+    const isExisting = await db.services.check(DexieTables.COOKIE_CONSENT)
+    setRendered(!isExisting)
+  }
+  useEffect(() => {
+    void checkCookieConsent()
+  }, [])
 
-    async function updateCookieConsent(isConsenting: boolean) {
-        await db.services.add(DexieTables.COOKIE_CONSENT, { isConsenting })
-        setRendered(false)
-    }
+  async function updateCookieConsent (isConsenting: boolean) {
+    await db.services.add(DexieTables.COOKIE_CONSENT, { isConsenting })
+    setRendered(false)
+  }
 
-   if (!isRendered) return null
+  if (!isRendered) return null
 
-    return (
+  return (
         <div className="rounded-md p-5 bg-white">
             <h3 className="font-bold text-2xl text-center">We value your privacy! 🍪</h3>
             <p className="pt-4 text-center">
@@ -34,20 +34,20 @@ const CookiePopup: FC<CookiePopupProps> = ({ customMessage }) => {
             </p>
             <div className="flex mt-10 justify-center gap-10">
                 <button
-                    onClick={async () => {
-                        await updateCookieConsent(false)
+                    onClick={ () => {
+                      void updateCookieConsent(false)
                     }}>
                     Reject All
                 </button>
                 <button
-                    onClick={async () => {
-                        await updateCookieConsent(true)
+                    onClick={ () => {
+                      void updateCookieConsent(true)
                     }}>
                     Accept All
                 </button>
             </div>
         </div>
-    )
+  )
 }
 
 export default CookiePopup
