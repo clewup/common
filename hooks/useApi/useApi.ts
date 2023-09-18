@@ -1,6 +1,6 @@
 'use client'
 
-import { useLockr } from '@/lib/common/contexts/LockrContext/LockrContext'
+import { useAuthKitty } from '@/lib/authkitty-helpers/contexts/AuthKittyContext/AuthKittyContext'
 
 enum RequestMethod {
   GET = 'GET',
@@ -11,7 +11,7 @@ enum RequestMethod {
 }
 
 export default function useApi () {
-  const { user } = useLockr()
+  const { user } = useAuthKitty()
 
   async function makeRequest<T = unknown> (url: string, method: RequestMethod, body?: unknown, options?: RequestInit) {
     const headers: HeadersInit & { 'x-user'?: string } = {
