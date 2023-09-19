@@ -1,4 +1,4 @@
-type RequestMethod = 'get' | 'post' | 'patch' | 'put' | 'delete'
+type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
 
 interface RequestOptions {
   headers?: Record<string, string>
@@ -54,22 +54,22 @@ export default class ApiService {
   }
 
   async get<T>(endpoint: string, options?: RequestOptions) {
-    return await this.makeRequest<T>(endpoint, 'get', undefined, options)
+    return await this.makeRequest<T>(endpoint, 'GET', undefined, options)
   }
 
   async post<T>(endpoint: string, body: unknown, options?: RequestOptions) {
-    return await this.makeRequest<T>(endpoint, 'post', body, options)
+    return await this.makeRequest<T>(endpoint, 'POST', body, options)
   }
 
   async patch<T>(endpoint: string, body: unknown, options?: RequestOptions) {
-    return await this.makeRequest<T>(endpoint, 'patch', body, options)
+    return await this.makeRequest<T>(endpoint, 'PATCH', body, options)
   }
 
   async put<T>(endpoint: string, body: unknown, options?: RequestOptions) {
-    return await this.makeRequest<T>(endpoint, 'put', body, options)
+    return await this.makeRequest<T>(endpoint, 'PUT', body, options)
   }
 
   async del<T>(endpoint: string, options?: RequestOptions) {
-    return await this.makeRequest<T>(endpoint, 'delete', undefined, options)
+    return await this.makeRequest<T>(endpoint, 'DELETE', undefined, options)
   }
 }
