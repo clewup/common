@@ -39,7 +39,8 @@ export default class ApiService {
     const response = await fetch(formattedUrl, {
       method,
       headers,
-      body: body ? JSON.stringify(body) : undefined
+      body: body ? JSON.stringify(body) : undefined,
+      cache: 'no-cache'
     })
 
     if (response.status === 500) {
